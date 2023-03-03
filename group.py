@@ -1,40 +1,34 @@
-class Group:
+from abc import ABC, abstractmethod
+
+class Group(ABC):
     """
-    Class for a general group. Will handle basic operations (mult and add)
-    determine or take in? identity, inverses
-    populate group visualization (everything will begin with terminal before moving to app or site)
+    Class for a general group.
+    Lists abstract methods plus a couple funtions that don't change between groups
     """
 
-    def __init__(self, name, operation):
-        self.name = name
-        operations = {'add': lambda x, y: x + y, 
-                      'mult': lambda x, y: x * y} # needs to be updated to include special group ops
-        self.op = operations[operation]
-        self.set = [] #need to fix this to be ordered
-        self.e = self.get_id() #get identity
-
-    def operate(self, *args):
-        #takes in at least one object to perform the operator on (order matters!!)
-        #args are ordered objects to be operated on 
-        sol = self.e
-        for arg in args:
-            sol = self.op(sol, arg)
-        return sol
-
+    @abstractmethod
     def get_id(self):
         pass
 
-    def get_inv(self, x):
-        pass
-        #this one is hard, not sure if there is a general form. may have to have limited groups...
-        #i.e. matrices and Z (mod n) have different methods to find e
-
-
-    def show_grp(self):
+    @abstractmethod
+    def get_inv(self):
         pass
 
-    def get_rand_elt(self):
+    @abstractmethod
+    def operate(self):
         pass
+
+    def cayley_table(self):
+        #creates cayley table for groups
+        pass
+        """should be something like
+        for a in elts:
+            for b in elts:
+                operate (a,b)
+                place in table
+                operate (b, a)
+                place in table"""
+
     
 
 """
